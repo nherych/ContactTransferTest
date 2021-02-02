@@ -10,7 +10,6 @@
 		BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A125C95FB3008561CD /* AppDelegate.swift */; };
 		BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */; };
 		BBC5B7A625C95FB3008561CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A525C95FB3008561CD /* ViewController.swift */; };
-		BBC5B7A925C95FB3008561CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC5B7A725C95FB3008561CD /* Main.storyboard */; };
 		BBC5B7AB25C95FB6008561CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC5B7AA25C95FB6008561CD /* Assets.xcassets */; };
 		BBC5B7AE25C95FB6008561CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC5B7AC25C95FB6008561CD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		BBC5B7A125C95FB3008561CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BBC5B7A525C95FB3008561CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BBC5B7A825C95FB3008561CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBC5B7AA25C95FB6008561CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBC5B7AD25C95FB6008561CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBC5B7AF25C95FB6008561CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +35,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBB7ECDC25C9719800439DCD /* System */ = {
+			isa = PBXGroup;
+			children = (
+				BBC5B7A125C95FB3008561CD /* AppDelegate.swift */,
+				BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		BBB7ECDE25C971B700439DCD /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				BBC5B7A525C95FB3008561CD /* ViewController.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		BBB7ECE025C971C200439DCD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BBC5B7AA25C95FB6008561CD /* Assets.xcassets */,
+				BBC5B7AC25C95FB6008561CD /* LaunchScreen.storyboard */,
+				BBC5B7AF25C95FB6008561CD /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		BBC5B79525C95FB2008561CD = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +81,9 @@
 		BBC5B7A025C95FB2008561CD /* ContactTransferTest */ = {
 			isa = PBXGroup;
 			children = (
-				BBC5B7A125C95FB3008561CD /* AppDelegate.swift */,
-				BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */,
-				BBC5B7A525C95FB3008561CD /* ViewController.swift */,
-				BBC5B7A725C95FB3008561CD /* Main.storyboard */,
-				BBC5B7AA25C95FB6008561CD /* Assets.xcassets */,
-				BBC5B7AC25C95FB6008561CD /* LaunchScreen.storyboard */,
-				BBC5B7AF25C95FB6008561CD /* Info.plist */,
+				BBB7ECDC25C9719800439DCD /* System */,
+				BBB7ECDE25C971B700439DCD /* Flow */,
+				BBB7ECE025C971C200439DCD /* Resources */,
 			);
 			path = ContactTransferTest;
 			sourceTree = "<group>";
@@ -126,7 +147,6 @@
 			files = (
 				BBC5B7AE25C95FB6008561CD /* LaunchScreen.storyboard in Resources */,
 				BBC5B7AB25C95FB6008561CD /* Assets.xcassets in Resources */,
-				BBC5B7A925C95FB3008561CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,14 +166,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BBC5B7A725C95FB3008561CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BBC5B7A825C95FB3008561CD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BBC5B7AC25C95FB6008561CD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,7 +300,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3KLGY7D4BM;
-				INFOPLIST_FILE = ContactTransferTest/Info.plist;
+				INFOPLIST_FILE = ContactTransferTest/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -308,7 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3KLGY7D4BM;
-				INFOPLIST_FILE = ContactTransferTest/Info.plist;
+				INFOPLIST_FILE = ContactTransferTest/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
