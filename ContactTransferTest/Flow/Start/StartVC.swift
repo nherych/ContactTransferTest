@@ -13,6 +13,11 @@ final class StartVC: UIViewController {
     
     private let presenter: StartPresenterInterface?
     
+    // MARK: - Views
+    
+    private let nameTextField: UITextField = .makeHeavyWith(fontSize: 18, placeholder: "Name")
+    private let startButton: UIButton = .make(title: "Start")
+    
     // MARK: - Contructor
     
     init(presenter: StartPresenterInterface) {
@@ -30,24 +35,72 @@ final class StartVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     // MARK: - Methods
     
     
-
+    @objc private func didTapOnStart(_ sender: UIButton) {
+        let presenter = UserListPresenter()
+        let controller = UserListVC(presenter: presenter)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
 }
 
 // MARK: - Configuration
 extension StartVC {
     private func configure() {
-        
+        setupViews()
+        configureNavigationBar()
+        configureStartButton()
+    }
+    
+    private func configureNavigationBar() {
+        title = "Share contact"
+        navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    private func configureStartButton() {
+        startButton.addTarget(self, action: #selector(didTapOnStart(_:)), for: .touchUpInside)
     }
 }
 
 // MARK: - StartPresenterDelegate
 extension StartVC: StartPresenterDelegate {
     
+}
+
+
+extension StartVC {
+    private func setupViews() {
+        setupNameTextView()
+        setupStartButton()
+    }
+    
+    private func setupNameTextView() {
+        nameTextField.layer.setBorder(width: 1, color: .darkGray)
+        view.addSubview(nameTextField)
+        nameTextField.layout {
+            $0.constraint(to: view, by: .leading(40), .trailing(-40))
+            $0.centerY.constraint(to: view, by: .centerY(0))
+            $0.size(.height(50))
+        }
+    }
+    
+    private func setupStartButton() {
+        startButton.backgroundColor = .green
+        startButton.layer.setCornerRadius(width: 25)
+        view.addSubview(startButton)
+        startButton.layout {
+            $0.top.constraint(to: nameTextField, by: .bottom(100))
+            $0.centerX.constraint(to: view, by: .centerX(0))
+            $0.size(.height(50), .width(120))
+        }
+    }
 }

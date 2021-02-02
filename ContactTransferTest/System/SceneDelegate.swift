@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = StartVC(presenter: presenter)
         viewController.view.backgroundColor = .white
         let navigation = UINavigationController(rootViewController: viewController)
+        navigation.navigationBar.prefersLargeTitles = true
         
         window.rootViewController = navigation
         self.window = window

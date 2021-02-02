@@ -14,6 +14,18 @@
 		BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */; };
 		BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */; };
 		BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */; };
+		BBB7ED1A25C9D06800439DCD /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1625C9D06800439DCD /* Anchor.swift */; };
+		BBB7ED1B25C9D06800439DCD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1725C9D06800439DCD /* Helpers.swift */; };
+		BBB7ED1C25C9D06800439DCD /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1825C9D06800439DCD /* Layout.swift */; };
+		BBB7ED1D25C9D06800439DCD /* LayoutEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1925C9D06800439DCD /* LayoutEnums.swift */; };
+		BBB7ED2825C9D17300439DCD /* UIButton+factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED2225C9D17300439DCD /* UIButton+factories.swift */; };
+		BBB7ED2925C9D17300439DCD /* UICollectionView+factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED2325C9D17300439DCD /* UICollectionView+factories.swift */; };
+		BBB7ED2A25C9D17300439DCD /* UIStackView+factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED2425C9D17300439DCD /* UIStackView+factories.swift */; };
+		BBB7ED2B25C9D17300439DCD /* UITextField+factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED2525C9D17300439DCD /* UITextField+factories.swift */; };
+		BBB7ED2C25C9D17300439DCD /* UIImageView+factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED2625C9D17300439DCD /* UIImageView+factories.swift */; };
+		BBB7ED2D25C9D17300439DCD /* UIlabel+factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED2725C9D17300439DCD /* UIlabel+factories.swift */; };
+		BBB7ED3225C9D41300439DCD /* CALayer+setBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED3125C9D41300439DCD /* CALayer+setBorder.swift */; };
+		BBB7ED3825C9D4EA00439DCD /* CALayer+setCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED3725C9D4EA00439DCD /* CALayer+setCornerRadius.swift */; };
 		BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A125C95FB3008561CD /* AppDelegate.swift */; };
 		BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */; };
 		BBC5B7A625C95FB3008561CD /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A525C95FB3008561CD /* StartVC.swift */; };
@@ -29,6 +41,18 @@
 		BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListPresenter.swift; sourceTree = "<group>"; };
 		BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionVC.swift; sourceTree = "<group>"; };
 		BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionPresenter.swift; sourceTree = "<group>"; };
+		BBB7ED1625C9D06800439DCD /* Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
+		BBB7ED1725C9D06800439DCD /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		BBB7ED1825C9D06800439DCD /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		BBB7ED1925C9D06800439DCD /* LayoutEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutEnums.swift; sourceTree = "<group>"; };
+		BBB7ED2225C9D17300439DCD /* UIButton+factories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+factories.swift"; sourceTree = "<group>"; };
+		BBB7ED2325C9D17300439DCD /* UICollectionView+factories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+factories.swift"; sourceTree = "<group>"; };
+		BBB7ED2425C9D17300439DCD /* UIStackView+factories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+factories.swift"; sourceTree = "<group>"; };
+		BBB7ED2525C9D17300439DCD /* UITextField+factories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+factories.swift"; sourceTree = "<group>"; };
+		BBB7ED2625C9D17300439DCD /* UIImageView+factories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+factories.swift"; sourceTree = "<group>"; };
+		BBB7ED2725C9D17300439DCD /* UIlabel+factories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIlabel+factories.swift"; sourceTree = "<group>"; };
+		BBB7ED3125C9D41300439DCD /* CALayer+setBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+setBorder.swift"; sourceTree = "<group>"; };
+		BBB7ED3725C9D4EA00439DCD /* CALayer+setCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+setCornerRadius.swift"; sourceTree = "<group>"; };
 		BBC5B79E25C95FB2008561CD /* ContactTransferTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTransferTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC5B7A125C95FB3008561CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +142,7 @@
 		BBB7ED0825C9C0FC00439DCD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BBB7ED1325C9CF0D00439DCD /* Factories */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -125,8 +150,58 @@
 		BBB7ED0925C9C10D00439DCD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BBB7ED1525C9D05500439DCD /* Helpers */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		BBB7ED0B25C9CC2800439DCD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ED3025C9D40500439DCD /* UIKit */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		BBB7ED1325C9CF0D00439DCD /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ED2225C9D17300439DCD /* UIButton+factories.swift */,
+				BBB7ED2325C9D17300439DCD /* UICollectionView+factories.swift */,
+				BBB7ED2625C9D17300439DCD /* UIImageView+factories.swift */,
+				BBB7ED2725C9D17300439DCD /* UIlabel+factories.swift */,
+				BBB7ED2425C9D17300439DCD /* UIStackView+factories.swift */,
+				BBB7ED2525C9D17300439DCD /* UITextField+factories.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		BBB7ED1425C9D04100439DCD /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ED1625C9D06800439DCD /* Anchor.swift */,
+				BBB7ED1725C9D06800439DCD /* Helpers.swift */,
+				BBB7ED1825C9D06800439DCD /* Layout.swift */,
+				BBB7ED1925C9D06800439DCD /* LayoutEnums.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		BBB7ED1525C9D05500439DCD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ED1425C9D04100439DCD /* Layout */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BBB7ED3025C9D40500439DCD /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ED3125C9D41300439DCD /* CALayer+setBorder.swift */,
+				BBB7ED3725C9D4EA00439DCD /* CALayer+setCornerRadius.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		BBC5B79525C95FB2008561CD = {
@@ -152,6 +227,7 @@
 				BBB7ECDE25C971B700439DCD /* Flow */,
 				BBB7ED0925C9C10D00439DCD /* Core */,
 				BBB7ED0825C9C0FC00439DCD /* UI */,
+				BBB7ED0B25C9CC2800439DCD /* Extension */,
 				BBB7ECE025C971C200439DCD /* Resources */,
 			);
 			path = ContactTransferTest;
@@ -226,16 +302,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB7ED2925C9D17300439DCD /* UICollectionView+factories.swift in Sources */,
 				BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */,
 				BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */,
+				BBB7ED2D25C9D17300439DCD /* UIlabel+factories.swift in Sources */,
 				BBC5B7A625C95FB3008561CD /* StartVC.swift in Sources */,
 				BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */,
+				BBB7ED2B25C9D17300439DCD /* UITextField+factories.swift in Sources */,
 				BBB7ECF025C9BA0C00439DCD /* StartPresenter.swift in Sources */,
+				BBB7ED3225C9D41300439DCD /* CALayer+setBorder.swift in Sources */,
+				BBB7ED1C25C9D06800439DCD /* Layout.swift in Sources */,
 				BBB7ECF325C9BE5A00439DCD /* UserListVC.swift in Sources */,
+				BBB7ED2825C9D17300439DCD /* UIButton+factories.swift in Sources */,
 				BBB7ECF925C9BF5F00439DCD /* PhonebookListVC.swift in Sources */,
+				BBB7ED3825C9D4EA00439DCD /* CALayer+setCornerRadius.swift in Sources */,
+				BBB7ED1D25C9D06800439DCD /* LayoutEnums.swift in Sources */,
+				BBB7ED1B25C9D06800439DCD /* Helpers.swift in Sources */,
 				BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */,
 				BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */,
 				BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */,
+				BBB7ED2C25C9D17300439DCD /* UIImageView+factories.swift in Sources */,
+				BBB7ED2A25C9D17300439DCD /* UIStackView+factories.swift in Sources */,
+				BBB7ED1A25C9D06800439DCD /* Anchor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
