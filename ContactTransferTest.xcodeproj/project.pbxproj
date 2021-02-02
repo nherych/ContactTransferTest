@@ -7,18 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBB7ECF025C9BA0C00439DCD /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */; };
+		BBB7ECF325C9BE5A00439DCD /* UserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */; };
+		BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */; };
+		BBB7ECF925C9BF5F00439DCD /* PhonebookListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */; };
+		BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */; };
+		BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */; };
+		BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */; };
 		BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A125C95FB3008561CD /* AppDelegate.swift */; };
 		BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */; };
-		BBC5B7A625C95FB3008561CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A525C95FB3008561CD /* ViewController.swift */; };
+		BBC5B7A625C95FB3008561CD /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A525C95FB3008561CD /* StartVC.swift */; };
 		BBC5B7AB25C95FB6008561CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC5B7AA25C95FB6008561CD /* Assets.xcassets */; };
 		BBC5B7AE25C95FB6008561CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC5B7AC25C95FB6008561CD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
+		BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListVC.swift; sourceTree = "<group>"; };
+		BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListPresenter.swift; sourceTree = "<group>"; };
+		BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListVC.swift; sourceTree = "<group>"; };
+		BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListPresenter.swift; sourceTree = "<group>"; };
+		BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionVC.swift; sourceTree = "<group>"; };
+		BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionPresenter.swift; sourceTree = "<group>"; };
 		BBC5B79E25C95FB2008561CD /* ContactTransferTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTransferTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC5B7A125C95FB3008561CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BBC5B7A525C95FB3008561CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BBC5B7A525C95FB3008561CD /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		BBC5B7AA25C95FB6008561CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBC5B7AD25C95FB6008561CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBC5B7AF25C95FB6008561CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,7 +61,9 @@
 		BBB7ECDE25C971B700439DCD /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				BBC5B7A525C95FB3008561CD /* ViewController.swift */,
+				BBB7ECEC25C9B88300439DCD /* UserSession */,
+				BBB7ECEB25C9B87800439DCD /* UserList */,
+				BBB7ECEA25C9B86D00439DCD /* Start */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -60,6 +76,57 @@
 				BBC5B7AF25C95FB6008561CD /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BBB7ECEA25C9B86D00439DCD /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				BBC5B7A525C95FB3008561CD /* StartVC.swift */,
+				BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		BBB7ECEB25C9B87800439DCD /* UserList */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */,
+				BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */,
+			);
+			path = UserList;
+			sourceTree = "<group>";
+		};
+		BBB7ECEC25C9B88300439DCD /* UserSession */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */,
+				BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */,
+				BBB7ECED25C9B89900439DCD /* PhonebookList */,
+			);
+			path = UserSession;
+			sourceTree = "<group>";
+		};
+		BBB7ECED25C9B89900439DCD /* PhonebookList */ = {
+			isa = PBXGroup;
+			children = (
+				BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */,
+				BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */,
+			);
+			path = PhonebookList;
+			sourceTree = "<group>";
+		};
+		BBB7ED0825C9C0FC00439DCD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BBB7ED0925C9C10D00439DCD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		BBC5B79525C95FB2008561CD = {
@@ -83,6 +150,8 @@
 			children = (
 				BBB7ECDC25C9719800439DCD /* System */,
 				BBB7ECDE25C971B700439DCD /* Flow */,
+				BBB7ED0925C9C10D00439DCD /* Core */,
+				BBB7ED0825C9C0FC00439DCD /* UI */,
 				BBB7ECE025C971C200439DCD /* Resources */,
 			);
 			path = ContactTransferTest;
@@ -157,7 +226,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBC5B7A625C95FB3008561CD /* ViewController.swift in Sources */,
+				BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */,
+				BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */,
+				BBC5B7A625C95FB3008561CD /* StartVC.swift in Sources */,
+				BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */,
+				BBB7ECF025C9BA0C00439DCD /* StartPresenter.swift in Sources */,
+				BBB7ECF325C9BE5A00439DCD /* UserListVC.swift in Sources */,
+				BBB7ECF925C9BF5F00439DCD /* PhonebookListVC.swift in Sources */,
+				BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */,
 				BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */,
 				BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */,
 			);
