@@ -13,6 +13,10 @@ final class UserListVC: UIViewController {
     
     private let presenter: UserListPresenterInterface?
     
+    // MARK: - Views
+    
+    private let collectionView: UICollectionView = .make()
+    
     // MARK: - Contructor
     
     init(presenter: UserListPresenterInterface) {
@@ -37,18 +41,60 @@ final class UserListVC: UIViewController {
     // MARK: - Methods
     
     
-
-
 }
 
 // MARK: - Configuration
 extension UserListVC {
     private func configure() {
-        
+        setupViews()
+        configureNavigationBar()
+        configureCollectionView()
     }
+    
+    private func configureNavigationBar() {
+        title = "User list"
+        navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    private func configureCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UserCell.self, forCellWithReuseIdentifier: "Cell")
+    }
+    
 }
 
 // MARK: - UserListPresenterDelegate
 extension UserListVC: UserListPresenterDelegate {
+    
+}
+
+// MARK: - UICollectionViewDataSource
+extension UserListVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        
+        return cell
+    }
+}
+
+extension UserListVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.size.width - 60, height: 80)
+    }
+}
+
+// MARK: Setup layout
+extension UserListVC {
+    private func setupViews() {
+        view.addSubview(collectionView)
+        collectionView.layout {
+            $0.constraint(to: view.safeAreaLayoutGuide)
+        }
+    }
     
 }

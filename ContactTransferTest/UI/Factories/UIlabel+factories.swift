@@ -18,19 +18,19 @@ extension UILabel {
     
     class func makeHeader(withSize size: CGFloat = 30) -> UILabel {
         let label: UILabel = .makeCommon()
-        label.font = UIFont(name: "Avenir-Medium", size: size)
+        label.font = UIFont(name: "Avenir-Heavy", size: size)
         return label
     }
     
-    class func makeSubheader(withSize size: CGFloat = 16) -> UILabel {
+    class func makeSubheader(withSize size: CGFloat = 18) -> UILabel {
         let label: UILabel = .makeCommon()
-        label.font = UIFont(name: "Avenir-Heavy", size: size)
+        label.font = UIFont(name: "Avenir-Medium", size: size)
         return label
     }
     
     class func makeRegular(withSize size: CGFloat = 16) -> UILabel {
         let label: UILabel = .makeCommon()
-        label.font = UIFont(name: "Avenir-Medium", size: size)
+        label.font = UIFont(name: "Avenir", size: size)
         return label
     }
     

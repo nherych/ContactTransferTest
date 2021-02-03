@@ -44,7 +44,6 @@ final class StartVC: UIViewController {
     
     // MARK: - Methods
     
-    
     @objc private func didTapOnStart(_ sender: UIButton) {
         let presenter = UserListPresenter()
         let controller = UserListVC(presenter: presenter)
