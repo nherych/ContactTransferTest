@@ -13,6 +13,25 @@ final class PhonebookListVC: UIViewController {
     
     private let presenter: PhonebookListPresenterInterface?
     
+    // MARK: Views
+    
+    // Navigation
+    private lazy var userBarItem: UIBarButtonItem = .init(
+        title: "Online",
+        style: .done,
+        target: self,
+        action: #selector(didTapOnUserItem(_:)))
+    
+    private lazy var selectBarItem: UIBarButtonItem = .init(
+        title: "Select",
+        style: .plain,
+        target: self,
+        action: #selector(didTapOnSelectItem(_:)))
+    
+    // Main
+    private let collectionView: UICollectionView = .make()
+    private let sendButton: UIButton = .make(title: "Send all contacts")
+
     // MARK: - Contructor
     
     init(presenter: PhonebookListPresenterInterface) {
@@ -30,24 +49,108 @@ final class PhonebookListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         // Do any additional setup after loading the view.
     }
     
     // MARK: - Methods
     
     
+    
+    // MARK: - Actions
+    
+    @objc private func didTapOnUserItem(_ sender: Any) {
+        print("didTapOnUserItem")
+        let presenter = UserListPresenter()
+        let controller = UserListVC(presenter: presenter)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
+    @objc private func didTapOnSelectItem(_ sender: UIBarButtonItem) {
+        print("didTapOnSelectItem")
+    }
+    
+    @objc private func didTapOnSendButton(_ sender: UIButton) {
+        print("didTapOnSendButton")
+    }
 
 }
 
 // MARK: - Configuration
 extension PhonebookListVC {
     private func configure() {
+        setupViews()
+        configureNavigationBar()
+        configureNavBarItems()
+        configureCollectionView()
         
+        sendButton.addTarget(self, action: #selector(didTapOnSendButton(_:)), for: .touchUpInside)
+    }
+    
+    private func configureNavigationBar() {
+        title = "Phonebook"
+        navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    private func configureNavBarItems() {
+        navigationItem.setLeftBarButton(userBarItem, animated: true)
+        navigationItem.setRightBarButton(selectBarItem, animated: true)
+    }
+    
+    private func configureCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ContactCell.self, forCellWithReuseIdentifier: "Cell")
     }
 }
 
 // MARK: - PhonebookListPresenterDelegate
 extension PhonebookListVC: PhonebookListPresenterDelegate {
     
+}
+
+// MARK: - UICollectionViewDataSource
+extension PhonebookListVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension PhonebookListVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.size.width - 20, height: 84)
+    }
+}
+
+// MARK: - Setup Layout
+extension PhonebookListVC {
+    private func setupViews() {
+        setupCollectionView()
+        setupSendButton()
+    }
+    
+    private func setupCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.layout {
+            $0.constraint(to: view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func setupSendButton() {
+        sendButton.backgroundColor = .green
+        sendButton.layer.setCornerRadius(width: 25)
+        view.addSubview(sendButton)
+        sendButton.layout {
+            $0.bottom.constraint(to: collectionView, by: .bottom(-20))
+            $0.centerX.constraint(to: view, by: .centerX(0))
+            $0.size(.height(50), .width(200))
+        }
+    }
 }

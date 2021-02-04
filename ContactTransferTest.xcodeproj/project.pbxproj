@@ -27,6 +27,7 @@
 		BBB7ED3225C9D41300439DCD /* CALayer+setBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED3125C9D41300439DCD /* CALayer+setBorder.swift */; };
 		BBB7ED3825C9D4EA00439DCD /* CALayer+setCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED3725C9D4EA00439DCD /* CALayer+setCornerRadius.swift */; };
 		BBB7ED3D25C9E44D00439DCD /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED3C25C9E44D00439DCD /* UserCell.swift */; };
+		BBB7ED4825CB449100439DCD /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED4725CB449000439DCD /* ContactCell.swift */; };
 		BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A125C95FB3008561CD /* AppDelegate.swift */; };
 		BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */; };
 		BBC5B7A625C95FB3008561CD /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5B7A525C95FB3008561CD /* StartVC.swift */; };
@@ -55,6 +56,7 @@
 		BBB7ED3125C9D41300439DCD /* CALayer+setBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+setBorder.swift"; sourceTree = "<group>"; };
 		BBB7ED3725C9D4EA00439DCD /* CALayer+setCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+setCornerRadius.swift"; sourceTree = "<group>"; };
 		BBB7ED3C25C9E44D00439DCD /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		BBB7ED4725CB449000439DCD /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		BBC5B79E25C95FB2008561CD /* ContactTransferTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTransferTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC5B7A125C95FB3008561CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC5B7A325C95FB3008561CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				BBB7ED3C25C9E44D00439DCD /* UserCell.swift */,
+				BBB7ED4725CB449000439DCD /* ContactCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB7ED4825CB449100439DCD /* ContactCell.swift in Sources */,
 				BBB7ED2925C9D17300439DCD /* UICollectionView+factories.swift in Sources */,
 				BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */,
 				BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */,

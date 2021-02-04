@@ -45,9 +45,13 @@ final class StartVC: UIViewController {
     // MARK: - Methods
     
     @objc private func didTapOnStart(_ sender: UIButton) {
-        let presenter = UserListPresenter()
-        let controller = UserListVC(presenter: presenter)
-        navigationController?.pushViewController(controller, animated: true)
+        let presenter = PhonebookListPresenter()
+        let controller = PhonebookListVC(presenter: presenter)
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.navigationBar.prefersLargeTitles = true
+        navigation.modalPresentationStyle = .fullScreen
+        
+        navigationController?.present(navigation, animated: true)
     }
 
 }
