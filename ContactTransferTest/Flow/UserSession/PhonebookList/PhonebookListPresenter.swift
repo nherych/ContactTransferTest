@@ -22,10 +22,12 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     weak var delegate: PhonebookListPresenterDelegate?
     
     private let phonebook = PhonebookManager()
+    private let networkManager: NetworkManager
     
     // MARK: - Constructor
     
-    init() {
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
         setup()
     }
     
