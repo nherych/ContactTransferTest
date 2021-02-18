@@ -21,6 +21,8 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     
     weak var delegate: PhonebookListPresenterDelegate?
     
+    private let phonebook = PhonebookManager()
+    
     // MARK: - Constructor
     
     init() {
@@ -31,6 +33,7 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     
     private func setup() {
         
+        phonebook.fetchContacts()
     }
     
 }
