@@ -21,15 +21,21 @@ final class UserListPresenter: UserListPresenterInterface {
     
     weak var delegate: UserListPresenterDelegate?
     
+    private let networkManager: NetworkManager?
+    
     // MARK: - Constructor
     
     init() {
+        networkManager = .init()
         setup()
     }
     
     // MARN: - Methods
     
     private func setup() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.networkManager?.registerNewUser(User(deviceId: "DeviceId-123123124qrda", displayName: "Test device"))
+        }
         
     }
     
