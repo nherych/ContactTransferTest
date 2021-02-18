@@ -11,7 +11,11 @@ class UserCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    //...
+    var user: User? {
+        didSet {
+            userNameLabel.text = user?.displayName
+        }
+    }
     
     // MARK: - Views
     
@@ -36,6 +40,10 @@ class UserCell: UICollectionViewCell {
     
     // MARK: - Methods
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        user = nil
+    }
 }
 
 

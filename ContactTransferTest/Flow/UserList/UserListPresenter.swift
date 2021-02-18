@@ -9,10 +9,13 @@ import Foundation
 
 protocol UserListPresenterInterface: class {
     var delegate: UserListPresenterDelegate? { get set }
+    
+    var numberOfUsers: Int { get }
+    func userAtIndex(_ index: Int) -> User
 }
 
 protocol UserListPresenterDelegate: class {
-    
+    func shouldReloadUserList()
 }
 
 final class UserListPresenter: UserListPresenterInterface {
@@ -23,20 +26,41 @@ final class UserListPresenter: UserListPresenterInterface {
     
     private let networkManager: NetworkManager?
     
+    //data
+    private var users: [User] = []
+    
+    
     // MARK: - Constructor
     
-    init() {
-        networkManager = .init()
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
         setup()
     }
     
-    // MARN: - Methods
+    // MARK: - Interface
     
-    private func setup() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.networkManager?.registerNewUser(User(deviceId: "DeviceId-123123124qrda", displayName: "Test device"))
-        }
-        
+    var numberOfUsers: Int {
+        users.count
     }
     
+    func userAtIndex(_ index: Int) -> User {
+        users[index]
+    }
+    
+    // MARK: - Methods
+    
+    private func setup() {
+        subscribeUsersUpdate()
+    }
+    
+}
+
+// MARK: - Fetching users
+extension UserListPresenter {
+    private func subscribeUsersUpdate() {
+        networkManager?.fetchUsers({ [weak self] users in
+            self?.users = users
+            self?.delegate?.shouldReloadUserList()
+        })
+    }
 }

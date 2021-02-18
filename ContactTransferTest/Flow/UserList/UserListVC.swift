@@ -66,17 +66,23 @@ extension UserListVC {
 
 // MARK: - UserListPresenterDelegate
 extension UserListVC: UserListPresenterDelegate {
-    
+    func shouldReloadUserList() {
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension UserListVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return presenter?.numberOfUsers ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        
+        if let cell = cell as? UserCell {
+            cell.user = presenter?.userAtIndex(indexPath.item)
+        }
         
         return cell
     }

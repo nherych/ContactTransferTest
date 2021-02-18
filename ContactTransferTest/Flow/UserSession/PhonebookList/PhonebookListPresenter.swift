@@ -9,10 +9,12 @@ import Foundation
 
 protocol PhonebookListPresenterInterface: class {
     var delegate: PhonebookListPresenterDelegate? { get set }
+    
+    func didTapOnUserList()
 }
 
 protocol PhonebookListPresenterDelegate: class {
-    
+    func shouldOpenUserListWith(presenter: UserListPresenterInterface)
 }
 
 final class PhonebookListPresenter: PhonebookListPresenterInterface {
@@ -31,11 +33,21 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
         setup()
     }
     
+    // MARK: - Interface
+    
+    func didTapOnUserList() {
+        let presenter = UserListPresenter(networkManager: networkManager)
+        delegate?.shouldOpenUserListWith(presenter: presenter)
+    }
+    
     // MARN: - Methods
     
     private func setup() {
         
         phonebook.fetchContacts()
+        networkManager.fetchUsers { users in
+            print(users)
+        }
     }
     
 }

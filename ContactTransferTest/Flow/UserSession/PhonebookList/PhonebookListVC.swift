@@ -61,9 +61,7 @@ final class PhonebookListVC: UIViewController {
     
     @objc private func didTapOnUserItem(_ sender: Any) {
         print("didTapOnUserItem")
-        let presenter = UserListPresenter()
-        let controller = UserListVC(presenter: presenter)
-        navigationController?.pushViewController(controller, animated: true)
+        presenter?.didTapOnUserList()
     }
 
     @objc private func didTapOnSelectItem(_ sender: UIBarButtonItem) {
@@ -106,6 +104,11 @@ extension PhonebookListVC {
 
 // MARK: - PhonebookListPresenterDelegate
 extension PhonebookListVC: PhonebookListPresenterDelegate {
+    func shouldOpenUserListWith(presenter: UserListPresenterInterface) {
+        let controller = UserListVC(presenter: presenter)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     
 }
 

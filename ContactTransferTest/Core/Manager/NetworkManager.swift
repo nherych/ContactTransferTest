@@ -18,7 +18,7 @@ enum UrlPath: String {
 
 protocol NetworkUserManagable {
     func registerNewUser(_ user: User)
-//    func
+    func fetchUsers(_ usersHandler: @escaping ([User])->Void)
 }
 
 class NetworkManager {
@@ -27,6 +27,17 @@ class NetworkManager {
     
     private let socketClient: StompClientLib
     private let url = URL(string: UrlPath.base.rawValue)!
+    
+    private var fetchUserHandlerStorage: [([User])->Void] = []
+    
+    //data
+    private var users: [User] = [] {
+        didSet {
+            fetchUserHandlerStorage.forEach {
+                $0(users)
+            }
+        }
+    }
     
     // MARK:  - Constructor
     
@@ -46,17 +57,29 @@ extension NetworkManager: NetworkUserManagable {
     func registerNewUser(_ user: User) {
         socketClient.sendJSONForDict(dict: user.toDict, toDestination: UrlPath.register.rawValue)
     }
+    
+    func fetchUsers(_ usersHandler: @escaping ([User]) -> Void) {
+        fetchUserHandlerStorage.append(usersHandler)
+        usersHandler(users)
+    }
+    
+    private func handleReceiveUpdateUser(_ data: AnyObject) {
+        let users = User.parseUsers(data)
+        guard !users.isEmpty else { return }
+        self.users = users
+    }
 }
 
 extension NetworkManager: StompClientLibDelegate {
-    func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
+    func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?,
+                     akaStringBody stringBody: String?, withHeader header: [String : String]?,
+                     withDestination destination: String) {
         print("OnReceive", destination)
         guard let response = jsonBody else { return }
         
-        
         switch destination {
         case UrlPath.users.rawValue:
-            print("Data", User.parseUsers(response))
+            handleReceiveUpdateUser(response)
         default:
             break
         }
@@ -80,7 +103,7 @@ extension NetworkManager: StompClientLibDelegate {
     }
     
     func serverDidSendPing() {
-        
+        print("serverDidSendPing")
     }
 }
 
