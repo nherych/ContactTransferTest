@@ -10,10 +10,14 @@ import Foundation
 protocol PhonebookListPresenterInterface: class {
     var delegate: PhonebookListPresenterDelegate? { get set }
     
+    var numberOfContacts: Int { get }
+    func contactAtIndex(_ index: Int) -> Contact
+    
     func didTapOnUserList()
 }
 
 protocol PhonebookListPresenterDelegate: class {
+    func shouldUpdateContactList()
     func shouldOpenUserListWith(presenter: UserListPresenterInterface)
 }
 
@@ -26,6 +30,9 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     private let phonebook = PhonebookManager()
     private let networkManager: NetworkManager
     
+    //data
+    private var contacts: [Contact] = []
+    
     // MARK: - Constructor
     
     init(networkManager: NetworkManager) {
@@ -35,6 +42,14 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     
     // MARK: - Interface
     
+    var numberOfContacts: Int {
+        contacts.count
+    }
+    
+    func contactAtIndex(_ index: Int) -> Contact {
+        contacts[index]
+    }
+    
     func didTapOnUserList() {
         let presenter = UserListPresenter(networkManager: networkManager)
         delegate?.shouldOpenUserListWith(presenter: presenter)
@@ -43,10 +58,10 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     // MARN: - Methods
     
     private func setup() {
-        
-        phonebook.fetchContacts()
-        networkManager.fetchUsers { users in
-            print(users)
+        phonebook.fetchContacts { [weak self] contacts in
+            self?.contacts = contacts
+            print(contacts)
+            self?.delegate?.shouldUpdateContactList()
         }
     }
     

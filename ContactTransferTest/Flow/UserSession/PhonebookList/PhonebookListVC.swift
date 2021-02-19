@@ -104,22 +104,28 @@ extension PhonebookListVC {
 
 // MARK: - PhonebookListPresenterDelegate
 extension PhonebookListVC: PhonebookListPresenterDelegate {
+    func shouldUpdateContactList() {
+        collectionView.reloadData()
+    }
+    
     func shouldOpenUserListWith(presenter: UserListPresenterInterface) {
         let controller = UserListVC(presenter: presenter)
         navigationController?.pushViewController(controller, animated: true)
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDataSource
 extension PhonebookListVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return presenter?.numberOfContacts ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        
+        if let cell = cell as? ContactCell {
+            cell.contact = presenter?.contactAtIndex(indexPath.item)
+        }
         
         return cell
     }

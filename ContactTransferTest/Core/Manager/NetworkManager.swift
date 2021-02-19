@@ -8,12 +8,30 @@
 import Foundation
 import StompClientLib
 
-enum UrlPath: String {
-    case base = "ws://test-env-2.eba-3e7rpc8d.us-east-1.elasticbeanstalk.com/ws"
+enum UrlPath {
+    case base
     
     // register
-    case users = "/topic/public"
-    case register = "/app/register"
+    case users
+    case register
+    
+    case invite(String)
+    case sendInvite
+    
+    var url: String {
+        switch self {
+        case .base:
+            return "ws://test-env-2.eba-3e7rpc8d.us-east-1.elasticbeanstalk.com/ws"
+        case .users:
+            return "/topic/public"
+        case .register:
+            return "/app/register"
+        case .invite(let uuid):
+            return "/user/\(uuid)/invite"
+        case .sendInvite:
+            return "/app/invite"
+        }
+    }
 }
 
 protocol NetworkUserManagable {
@@ -21,12 +39,18 @@ protocol NetworkUserManagable {
     func fetchUsers(_ usersHandler: @escaping ([User])->Void)
 }
 
+protocol NetworkInvitable {
+    func didReceiveInvite()
+    func sendInviteResponse(_ response: Bool)
+}
+
 class NetworkManager {
     
     // MARK: - Properties
     
     private let socketClient: StompClientLib
-    private let url = URL(string: UrlPath.base.rawValue)!
+    private let url = URL(string: UrlPath.base.url)!
+    private let currentUserUUID = UIDevice.current.identifierForVendor?.uuidString
     
     private var fetchUserHandlerStorage: [([User])->Void] = []
     
@@ -55,7 +79,8 @@ class NetworkManager {
 // MARK: - NetworkUserManagable
 extension NetworkManager: NetworkUserManagable {
     func registerNewUser(_ user: User) {
-        socketClient.sendJSONForDict(dict: user.toDict, toDestination: UrlPath.register.rawValue)
+        socketClient.sendJSONForDict(dict: user.toDict, toDestination: UrlPath.register.url)
+        subscribeOnReceiveInvite()
     }
     
     func fetchUsers(_ usersHandler: @escaping ([User]) -> Void) {
@@ -67,6 +92,29 @@ extension NetworkManager: NetworkUserManagable {
         let users = User.parseUsers(data)
         guard !users.isEmpty else { return }
         self.users = users
+    
+        
+    }
+}
+
+// MARK: - NetworkInvitable
+extension NetworkManager: NetworkInvitable {
+    func didReceiveInvite() {
+        
+    }
+    
+    func sendInviteResponse(_ response: Bool) {
+        
+    }
+    
+    var currentUserReceiveInvite: String? {
+        guard let uuid = currentUserUUID else { return nil }
+        return UrlPath.invite(uuid).url
+    }
+    
+    private func subscribeOnReceiveInvite() {
+        guard let url = currentUserReceiveInvite else { return }
+        socketClient.subscribe(destination: url)
     }
 }
 
@@ -78,7 +126,7 @@ extension NetworkManager: StompClientLibDelegate {
         guard let response = jsonBody else { return }
         
         switch destination {
-        case UrlPath.users.rawValue:
+        case UrlPath.users.url:
             handleReceiveUpdateUser(response)
         default:
             break
@@ -91,7 +139,7 @@ extension NetworkManager: StompClientLibDelegate {
     }
     
     func stompClientDidConnect(client: StompClientLib!) {
-        socketClient.subscribe(destination: UrlPath.users.rawValue)
+        socketClient.subscribe(destination: UrlPath.users.url)
     }
     
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {

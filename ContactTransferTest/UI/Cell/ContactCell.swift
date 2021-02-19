@@ -11,7 +11,13 @@ class ContactCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    //...
+    var contact: Contact? {
+        didSet {
+            userNameLabel.text = contact?.fullName
+            phoneNumberLabel.text = contact?.phoneNumber
+            emailAdressLabel.text = contact?.email
+        }
+    }
     
     // MARK: - Views
     
@@ -39,6 +45,10 @@ class ContactCell: UICollectionViewCell {
     
     // MARK: - Methods
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contact = nil
+    }
 }
 
 // MARK: - Configuration
@@ -51,9 +61,9 @@ extension ContactCell {
         setupPhotoImageView()
         setupTextContainer()
         
-        userNameLabel.text = "Thomas Edison"
-        phoneNumberLabel.text = "+100 3434 34 556"
-        emailAdressLabel.text = "thomas.edison@gmail.com"
+        userNameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        phoneNumberLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        emailAdressLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
     
     private func setupPhotoImageView() {
