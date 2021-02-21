@@ -17,7 +17,7 @@ protocol StartPresenterInterface: class {
 
 protocol StartPresenterDelegate: class {
     func didHappenErrorWithName()
-    func shouldOpenContactListWith(presenter: PhonebookListPresenterInterface)
+    func shouldOpenUserListWith(presenter: UserListPresenterInterface)
 }
 
 final class StartPresenter: StartPresenterInterface {
@@ -51,8 +51,8 @@ final class StartPresenter: StartPresenterInterface {
             let user = User(deviceId: deviceUUID, displayName: name)
             print("New user ", user)
             manager.registerNewUser(user)
-            let presenter = PhonebookListPresenter(networkManager: manager)
-            delegate?.shouldOpenContactListWith(presenter: presenter)
+            let presenter = UserListPresenter(networkManager: manager)
+            delegate?.shouldOpenUserListWith(presenter: presenter)
         } else {
             delegate?.didHappenErrorWithName()
         }

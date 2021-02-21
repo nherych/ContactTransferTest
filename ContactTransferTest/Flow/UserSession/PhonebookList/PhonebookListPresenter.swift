@@ -7,25 +7,14 @@
 
 import Foundation
 
-protocol PhonebookListPresenterInterface: PhonebookUserInvitePresenterInterface {
+protocol PhonebookListPresenterInterface: class {
     var delegate: PhonebookListPresenterDelegate? { get set }
     
     var numberOfContacts: Int { get }
     func contactAtIndex(_ index: Int) -> Contact
-    
-    func didTapOnUserList()
 }
 
-protocol PhonebookUserInvitePresenterInterface: class {
-    func acceptInvite(_ invite: Invite)
-    func declineInvite(_ invite: Invite)
-}
-
-protocol PhonebookUserInvitePresenterDelegate: class {
-    func didReceiveInvite(_ invite: Invite)
-}
-
-protocol PhonebookListPresenterDelegate: PhonebookUserInvitePresenterDelegate {
+protocol PhonebookListPresenterDelegate: class {
     func shouldUpdateContactList()
     func shouldOpenUserListWith(presenter: UserListPresenterInterface)
 }
@@ -35,6 +24,8 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     // MARK: - Properties
     
     weak var delegate: PhonebookListPresenterDelegate?
+        
+    private let userIdToSend: String
     
     private let phonebook = PhonebookManager()
     private let networkManager: NetworkManager
@@ -44,7 +35,8 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     
     // MARK: - Constructor
     
-    init(networkManager: NetworkManager) {
+    init(userIdToSend: String, networkManager: NetworkManager) {
+        self.userIdToSend = userIdToSend
         self.networkManager = networkManager
         setup()
     }
@@ -83,19 +75,9 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
             self?.delegate?.shouldUpdateContactList()
         }
         
-        networkManager.didReceiveInvite { [weak self] invite in
-            print(invite)
-            self?.delegate?.didReceiveInvite(invite)
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                guard let myName = self?.networkManager.currentUser?.displayName else { return }
-//                self?.networkManager.sendInviteAnswer(invite.accept(myName: myName))
-//            }
-        }
         
-        networkManager.didReceiveInviteAnswer { invite in
-            print("==== ANSWER ====")
-            print(invite)
-        }
+        
+        
     }
     
 }

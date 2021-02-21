@@ -53,7 +53,6 @@ class NetworkManager {
     private let socketClient: StompClientLib
     private let url = URL(string: UrlPath.base.url)!
     private (set) var currentUser: User?
-//    private let currentUserUUID = UIDevice.current.identifierForVendor?.uuidString
     
     private var fetchUserHandlerStorage: [([User])->Void] = []
     private var inviteHandlerStorage: [(Invite)->Void] = []
@@ -87,8 +86,6 @@ extension NetworkManager: NetworkUserManagable {
         socketClient.sendJSONForDict(dict: user.toDict, toDestination: UrlPath.register.url)
         currentUser = user
         subscribeOnReceiveInvite()
-        
-        requestInviteFor(User(deviceId: "77448930-B72B-4AA0-9E22-8A0AB6F66050", displayName: "Bbb"))
     }
     
     func fetchUsers(_ usersHandler: @escaping ([User]) -> Void) {

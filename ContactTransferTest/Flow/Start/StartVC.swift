@@ -78,9 +78,8 @@ extension StartVC: StartPresenterDelegate {
     func didHappenErrorWithName() {
         nameTextField.layer.setBorder(width: 1, color: .red)
     }
-    
-    func shouldOpenContactListWith(presenter: PhonebookListPresenterInterface) {
-        let controller = PhonebookListVC(presenter: presenter)
+    func shouldOpenUserListWith(presenter: UserListPresenterInterface) {
+        let controller = UserListVC(presenter: presenter)
         let navigation = UINavigationController(rootViewController: controller)
         navigation.navigationBar.prefersLargeTitles = true
         navigation.modalPresentationStyle = .fullScreen
@@ -88,6 +87,7 @@ extension StartVC: StartPresenterDelegate {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension StartVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         nameTextField.layer.setBorder(width: 1, color: .black)
@@ -103,7 +103,7 @@ extension StartVC: UITextFieldDelegate {
     }
 }
 
-
+// MARK: - Setup Layout
 extension StartVC {
     private func setupViews() {
         setupNameTextView()

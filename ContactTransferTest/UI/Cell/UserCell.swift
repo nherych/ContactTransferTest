@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol UserCellDelegate: class {
+    func shouldStartPairWithUser(_ user: User)
+}
+
 class UserCell: UICollectionViewCell {
     
     // MARK: - Properties
@@ -16,6 +20,8 @@ class UserCell: UICollectionViewCell {
             userNameLabel.text = user?.displayName
         }
     }
+    
+    weak var delegate: UserCellDelegate?
     
     // MARK: - Views
     
@@ -44,6 +50,11 @@ class UserCell: UICollectionViewCell {
         super.prepareForReuse()
         user = nil
     }
+    
+    @objc private func didTapOnPair(_ sender: UIButton) {
+        guard let user = user else { return }
+        delegate?.shouldStartPairWithUser(user)
+    }
 }
 
 
@@ -51,6 +62,7 @@ class UserCell: UICollectionViewCell {
 extension UserCell {
     func configure() {
         setupLayout()
+        pairButton.addTarget(self, action: #selector(didTapOnPair(_:)), for: .touchUpInside)
     }
     
     func setupLayout() {

@@ -66,8 +66,45 @@ extension UserListVC {
 
 // MARK: - UserListPresenterDelegate
 extension UserListVC: UserListPresenterDelegate {
+    func shouldTransferContacts(presenter: PhonebookListPresenterInterface) {
+        let controller = PhonebookListVC(presenter: presenter)
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.navigationBar.prefersLargeTitles = true
+        navigationController?.present(navigation, animated: true)
+    }
+    
+    func shouldGetContactsFromUser(withId id: String) {
+        let presenter = ContactTransferPresenter()
+        let controller = ContactTransferVC(presenter: presenter)
+        controller.view.backgroundColor = .white
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.navigationBar.prefersLargeTitles = true
+        navigationController?.present(navigation, animated: true)
+    }
+    
+    func didReceiveInvite(_ invite: Invite) {
+        let alert = UIAlertController(title: "Reveived invite", message: "User \(invite.displayName) want to share contacts with you", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Accept", style: .default) { [weak self] _ in
+            self?.presenter?.acceptInvite(invite)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Decline", style: .cancel) { [weak self] _ in
+            self?.presenter?.declineInvite(invite)
+        })
+
+        self.present(alert, animated: true)
+    }
+    
     func shouldReloadUserList() {
         collectionView.reloadData()
+    }
+}
+
+// MARK: - UserCellDelegate
+extension UserListVC: UserCellDelegate {
+    func shouldStartPairWithUser(_ user: User) {
+        presenter?.sendInviteForUser(user)
     }
 }
 
@@ -82,12 +119,14 @@ extension UserListVC: UICollectionViewDataSource {
         
         if let cell = cell as? UserCell {
             cell.user = presenter?.userAtIndex(indexPath.item)
+            cell.delegate = self
         }
         
         return cell
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension UserListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.size.width - 60, height: 80)

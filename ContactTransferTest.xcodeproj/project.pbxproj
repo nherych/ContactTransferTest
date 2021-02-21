@@ -15,8 +15,8 @@
 		BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */; };
 		BBB7ECF925C9BF5F00439DCD /* PhonebookListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */; };
 		BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */; };
-		BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */; };
-		BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */; };
+		BBB7ED0125C9C05600439DCD /* ContactTransferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0025C9C05600439DCD /* ContactTransferVC.swift */; };
+		BBB7ED0525C9C07100439DCD /* ContactTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0425C9C07100439DCD /* ContactTransferPresenter.swift */; };
 		BBB7ED1A25C9D06800439DCD /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1625C9D06800439DCD /* Anchor.swift */; };
 		BBB7ED1B25C9D06800439DCD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1725C9D06800439DCD /* Helpers.swift */; };
 		BBB7ED1C25C9D06800439DCD /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1825C9D06800439DCD /* Layout.swift */; };
@@ -51,8 +51,8 @@
 		BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListPresenter.swift; sourceTree = "<group>"; };
 		BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListVC.swift; sourceTree = "<group>"; };
 		BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListPresenter.swift; sourceTree = "<group>"; };
-		BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionVC.swift; sourceTree = "<group>"; };
-		BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionPresenter.swift; sourceTree = "<group>"; };
+		BBB7ED0025C9C05600439DCD /* ContactTransferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTransferVC.swift; sourceTree = "<group>"; };
+		BBB7ED0425C9C07100439DCD /* ContactTransferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTransferPresenter.swift; sourceTree = "<group>"; };
 		BBB7ED1625C9D06800439DCD /* Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
 		BBB7ED1725C9D06800439DCD /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BBB7ED1825C9D06800439DCD /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
@@ -157,8 +157,8 @@
 		BBB7ECEC25C9B88300439DCD /* UserSession */ = {
 			isa = PBXGroup;
 			children = (
-				BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */,
-				BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */,
+				BBB7ED0025C9C05600439DCD /* ContactTransferVC.swift */,
+				BBB7ED0425C9C07100439DCD /* ContactTransferPresenter.swift */,
 				BBB7ECED25C9B89900439DCD /* PhonebookList */,
 			);
 			path = UserSession;
@@ -414,7 +414,7 @@
 			files = (
 				BBB7ED4825CB449100439DCD /* ContactCell.swift in Sources */,
 				BBB7ED2925C9D17300439DCD /* UICollectionView+factories.swift in Sources */,
-				BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */,
+				BBB7ED0525C9C07100439DCD /* ContactTransferPresenter.swift in Sources */,
 				BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */,
 				BBB7ED2D25C9D17300439DCD /* UIlabel+factories.swift in Sources */,
 				BB50A04925DFA1DC00E75DF9 /* User.swift in Sources */,
@@ -432,7 +432,7 @@
 				BBBC23F025CC4840006837EA /* NetworkManager.swift in Sources */,
 				BBB7ED1D25C9D06800439DCD /* LayoutEnums.swift in Sources */,
 				BBB7ED1B25C9D06800439DCD /* Helpers.swift in Sources */,
-				BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */,
+				BBB7ED0125C9C05600439DCD /* ContactTransferVC.swift in Sources */,
 				BBBC23EA25CC12A0006837EA /* PhonebookManager.swift in Sources */,
 				BB50A04C25DFA29800E75DF9 /* Invite.swift in Sources */,
 				BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */,
