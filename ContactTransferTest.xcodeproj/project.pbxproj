@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		4C1C48831AAB83DC7221191A /* Pods_ContactTransferTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6A9069074D5D6937B75510 /* Pods_ContactTransferTest.framework */; };
+		BB50A04925DFA1DC00E75DF9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A04825DFA1DB00E75DF9 /* User.swift */; };
+		BB50A04C25DFA29800E75DF9 /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A04B25DFA29800E75DF9 /* Invite.swift */; };
 		BBB7ECF025C9BA0C00439DCD /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */; };
 		BBB7ECF325C9BE5A00439DCD /* UserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */; };
 		BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */; };
 		BBB7ECF925C9BF5F00439DCD /* PhonebookListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */; };
 		BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */; };
-		BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */; };
-		BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */; };
+		BBB7ED0125C9C05600439DCD /* ContactTransferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0025C9C05600439DCD /* ContactTransferVC.swift */; };
+		BBB7ED0525C9C07100439DCD /* ContactTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED0425C9C07100439DCD /* ContactTransferPresenter.swift */; };
 		BBB7ED1A25C9D06800439DCD /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1625C9D06800439DCD /* Anchor.swift */; };
 		BBB7ED1B25C9D06800439DCD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1725C9D06800439DCD /* Helpers.swift */; };
 		BBB7ED1C25C9D06800439DCD /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ED1825C9D06800439DCD /* Layout.swift */; };
@@ -42,13 +44,15 @@
 		1E3E92B2854D811D079BFF41 /* Pods-ContactTransferTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactTransferTest.release.xcconfig"; path = "Target Support Files/Pods-ContactTransferTest/Pods-ContactTransferTest.release.xcconfig"; sourceTree = "<group>"; };
 		4B6A9069074D5D6937B75510 /* Pods_ContactTransferTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContactTransferTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2BD9D732E3108674916942 /* Pods-ContactTransferTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactTransferTest.debug.xcconfig"; path = "Target Support Files/Pods-ContactTransferTest/Pods-ContactTransferTest.debug.xcconfig"; sourceTree = "<group>"; };
+		BB50A04825DFA1DB00E75DF9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BB50A04B25DFA29800E75DF9 /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
 		BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListVC.swift; sourceTree = "<group>"; };
 		BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListPresenter.swift; sourceTree = "<group>"; };
 		BBB7ECF825C9BF5F00439DCD /* PhonebookListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListVC.swift; sourceTree = "<group>"; };
 		BBB7ECFD25C9BF7E00439DCD /* PhonebookListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonebookListPresenter.swift; sourceTree = "<group>"; };
-		BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionVC.swift; sourceTree = "<group>"; };
-		BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionPresenter.swift; sourceTree = "<group>"; };
+		BBB7ED0025C9C05600439DCD /* ContactTransferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTransferVC.swift; sourceTree = "<group>"; };
+		BBB7ED0425C9C07100439DCD /* ContactTransferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTransferPresenter.swift; sourceTree = "<group>"; };
 		BBB7ED1625C9D06800439DCD /* Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
 		BBB7ED1725C9D06800439DCD /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BBB7ED1825C9D06800439DCD /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 				4B6A9069074D5D6937B75510 /* Pods_ContactTransferTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB50A04725DFA1CB00E75DF9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB50A04825DFA1DB00E75DF9 /* User.swift */,
+				BB50A04B25DFA29800E75DF9 /* Invite.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BBB7ECDC25C9719800439DCD /* System */ = {
@@ -144,8 +157,8 @@
 		BBB7ECEC25C9B88300439DCD /* UserSession */ = {
 			isa = PBXGroup;
 			children = (
-				BBB7ED0025C9C05600439DCD /* UserSessionVC.swift */,
-				BBB7ED0425C9C07100439DCD /* UserSessionPresenter.swift */,
+				BBB7ED0025C9C05600439DCD /* ContactTransferVC.swift */,
+				BBB7ED0425C9C07100439DCD /* ContactTransferPresenter.swift */,
 				BBB7ECED25C9B89900439DCD /* PhonebookList */,
 			);
 			path = UserSession;
@@ -172,6 +185,7 @@
 		BBB7ED0925C9C10D00439DCD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BB50A04725DFA1CB00E75DF9 /* Models */,
 				BBBC23EC25CC12AA006837EA /* Manager */,
 				BBB7ED1525C9D05500439DCD /* Helpers */,
 			);
@@ -400,9 +414,10 @@
 			files = (
 				BBB7ED4825CB449100439DCD /* ContactCell.swift in Sources */,
 				BBB7ED2925C9D17300439DCD /* UICollectionView+factories.swift in Sources */,
-				BBB7ED0525C9C07100439DCD /* UserSessionPresenter.swift in Sources */,
+				BBB7ED0525C9C07100439DCD /* ContactTransferPresenter.swift in Sources */,
 				BBB7ECFE25C9BF7E00439DCD /* PhonebookListPresenter.swift in Sources */,
 				BBB7ED2D25C9D17300439DCD /* UIlabel+factories.swift in Sources */,
+				BB50A04925DFA1DC00E75DF9 /* User.swift in Sources */,
 				BBC5B7A625C95FB3008561CD /* StartVC.swift in Sources */,
 				BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */,
 				BBB7ED2B25C9D17300439DCD /* UITextField+factories.swift in Sources */,
@@ -417,8 +432,9 @@
 				BBBC23F025CC4840006837EA /* NetworkManager.swift in Sources */,
 				BBB7ED1D25C9D06800439DCD /* LayoutEnums.swift in Sources */,
 				BBB7ED1B25C9D06800439DCD /* Helpers.swift in Sources */,
-				BBB7ED0125C9C05600439DCD /* UserSessionVC.swift in Sources */,
+				BBB7ED0125C9C05600439DCD /* ContactTransferVC.swift in Sources */,
 				BBBC23EA25CC12A0006837EA /* PhonebookManager.swift in Sources */,
+				BB50A04C25DFA29800E75DF9 /* Invite.swift in Sources */,
 				BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */,
 				BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */,
 				BBB7ED2C25C9D17300439DCD /* UIImageView+factories.swift in Sources */,

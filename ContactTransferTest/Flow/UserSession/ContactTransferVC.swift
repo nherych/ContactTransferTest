@@ -1,5 +1,5 @@
 //
-//  PhonebookListVC.swift
+//  ContactTransferVC.swift
 //  ContactTransferTest
 //
 //  Created by Nazar Herych on 02.02.2021.
@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class PhonebookListVC: UIViewController {
+final class ContactTransferVC: UIViewController {
 
     // MARK: - Properties
     
-    private let presenter: PhonebookListPresenterInterface?
+    private let presenter: ContactTransferPresenterInterface?
     
     // MARK: Views
+    
+    private lazy var progressView: UIProgressView = .init()
     
     // Navigation
     private lazy var userBarItem: UIBarButtonItem = .init(
@@ -22,19 +24,17 @@ final class PhonebookListVC: UIViewController {
         target: self,
         action: #selector(didTapOnCancel(_:)))
     
-    private lazy var selectBarItem: UIBarButtonItem = .init(
-        title: "Select",
+    private lazy var progressBarItem: UIBarButtonItem = .init(
+        title: "-/-",
         style: .plain,
         target: self,
         action: #selector(didTapOnSelectItem(_:)))
     
-    // Main
     private let collectionView: UICollectionView = .make()
-    private let sendButton: UIButton = .make(title: "Send all contacts")
-
+    
     // MARK: - Contructor
     
-    init(presenter: PhonebookListPresenterInterface) {
+    init(presenter: ContactTransferPresenterInterface) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         self.presenter?.delegate = self
@@ -49,7 +49,6 @@ final class PhonebookListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         // Do any additional setup after loading the view.
     }
     
@@ -67,22 +66,16 @@ final class PhonebookListVC: UIViewController {
     @objc private func didTapOnSelectItem(_ sender: UIBarButtonItem) {
         print("didTapOnSelectItem")
     }
-    
-    @objc private func didTapOnSendButton(_ sender: UIButton) {
-        print("didTapOnSendButton")
-    }
 
 }
 
 // MARK: - Configuration
-extension PhonebookListVC {
+extension ContactTransferVC {
     private func configure() {
         setupViews()
         configureNavigationBar()
         configureNavBarItems()
         configureCollectionView()
-        
-        sendButton.addTarget(self, action: #selector(didTapOnSendButton(_:)), for: .touchUpInside)
     }
     
     private func configureNavigationBar() {
@@ -92,7 +85,7 @@ extension PhonebookListVC {
     
     private func configureNavBarItems() {
         navigationItem.setLeftBarButton(userBarItem, animated: true)
-//        navigationItem.setRightBarButton(selectBarItem, animated: true)
+        navigationItem.setRightBarButton(progressBarItem, animated: true)
     }
     
     private func configureCollectionView() {
@@ -102,64 +95,57 @@ extension PhonebookListVC {
     }
 }
 
-// MARK: - PhonebookListPresenterDelegate
-extension PhonebookListVC: PhonebookListPresenterDelegate {
-    func shouldUpdateContactList() {
-        collectionView.reloadData()
-    }
+// MARK: - UserSessionPresenterDelegate
+extension ContactTransferVC: ContactTransferPresenterDelegate {
     
-    func shouldOpenUserListWith(presenter: UserListPresenterInterface) {
-        let controller = UserListVC(presenter: presenter)
-        navigationController?.pushViewController(controller, animated: true)
-    }
 }
 
 // MARK: - UICollectionViewDataSource
-extension PhonebookListVC: UICollectionViewDataSource {
+extension ContactTransferVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.numberOfContacts ?? 0
+        return 6//presenter?.numberOfContacts ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         
-        if let cell = cell as? ContactCell {
-            cell.contact = presenter?.contactAtIndex(indexPath.item)
-        }
+//        if let cell = cell as? ContactCell {
+//            cell.contact = presenter?.contactAtIndex(indexPath.item)
+//        }
         
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension PhonebookListVC: UICollectionViewDelegateFlowLayout {
+extension ContactTransferVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.size.width - 20, height: 84)
     }
 }
 
 // MARK: - Setup Layout
-extension PhonebookListVC {
+extension ContactTransferVC {
     private func setupViews() {
         setupCollectionView()
-        setupSendButton()
+        setupProgressView()
+    }
+    
+    func setupProgressView() {
+        collectionView.addSubview(progressView)
+        progressView.setProgress(0.7, animated: true)
+        progressView.layout {
+            $0.bottom.constraint(to: view.safeAreaLayoutGuide, by: .bottom(-20))
+            $0.leading.constraint(to: view.safeAreaLayoutGuide, by: .leading(40))
+            $0.trailing.constraint(to: view.safeAreaLayoutGuide, by: .trailing(-40))
+        }
     }
     
     private func setupCollectionView() {
         view.addSubview(collectionView)
+        collectionView.contentInset = .init(top: 10, left: 0, bottom: 0, right: 0)
         collectionView.layout {
             $0.constraint(to: view.safeAreaLayoutGuide)
-        }
-    }
-    
-    private func setupSendButton() {
-        sendButton.backgroundColor = .green
-        sendButton.layer.setCornerRadius(width: 25)
-        view.addSubview(sendButton)
-        sendButton.layout {
-            $0.bottom.constraint(to: collectionView, by: .bottom(-20))
-            $0.centerX.constraint(to: view, by: .centerX(0))
-            $0.size(.height(50), .width(200))
         }
     }
 }

@@ -45,13 +45,7 @@ final class StartVC: UIViewController {
     // MARK: - Methods
     
     @objc private func didTapOnStart(_ sender: UIButton) {
-        let presenter = PhonebookListPresenter()
-        let controller = PhonebookListVC(presenter: presenter)
-        let navigation = UINavigationController(rootViewController: controller)
-        navigation.navigationBar.prefersLargeTitles = true
-        navigation.modalPresentationStyle = .fullScreen
-        
-        navigationController?.present(navigation, animated: true)
+        presenter?.shouldStart()
     }
 
 }
@@ -62,11 +56,16 @@ extension StartVC {
         setupViews()
         configureNavigationBar()
         configureStartButton()
+        configureTextField()
     }
     
     private func configureNavigationBar() {
         title = "Share contact"
         navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    private func configureTextField() {
+        nameTextField.delegate = self
     }
     
     private func configureStartButton() {
@@ -76,10 +75,35 @@ extension StartVC {
 
 // MARK: - StartPresenterDelegate
 extension StartVC: StartPresenterDelegate {
-    
+    func didHappenErrorWithName() {
+        nameTextField.layer.setBorder(width: 1, color: .red)
+    }
+    func shouldOpenUserListWith(presenter: UserListPresenterInterface) {
+        let controller = UserListVC(presenter: presenter)
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.navigationBar.prefersLargeTitles = true
+        navigation.modalPresentationStyle = .fullScreen
+        navigationController?.present(navigation, animated: true)
+    }
 }
 
+// MARK: - UITextFieldDelegate
+extension StartVC: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nameTextField.layer.setBorder(width: 1, color: .black)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        presenter?.didTypeName = textField.text
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
 
+// MARK: - Setup Layout
 extension StartVC {
     private func setupViews() {
         setupNameTextView()
