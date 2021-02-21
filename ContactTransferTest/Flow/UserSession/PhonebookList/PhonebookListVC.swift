@@ -112,6 +112,20 @@ extension PhonebookListVC: PhonebookListPresenterDelegate {
         let controller = UserListVC(presenter: presenter)
         navigationController?.pushViewController(controller, animated: true)
     }
+    
+    func didReceiveInvite(_ invite: Invite) {
+        let alert = UIAlertController(title: "Reveived invite", message: "User \(invite.displayName) want to share with you contacts", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Accept", style: .default) { [weak self] _ in
+            self?.presenter?.acceptInvite(invite)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Decline", style: .cancel) { [weak self] _ in
+            self?.presenter?.declineInvite(invite)
+        })
+
+        self.present(alert, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDataSource

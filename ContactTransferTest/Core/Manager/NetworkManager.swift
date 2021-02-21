@@ -40,8 +40,10 @@ protocol NetworkUserManagable {
 }
 
 protocol NetworkInvitable {
-    func didReceiveInvite()
-    func sendInviteResponse(_ response: Bool)
+    func didReceiveInvite(_ handler: @escaping (Invite)->Void)
+    func didReceiveInviteAnswer(_ handler: @escaping (Invite)->Void)
+    func sendInviteAnswer(_ invite: Invite)
+    func requestInviteFor(_ user: User)
 }
 
 class NetworkManager {
@@ -50,9 +52,12 @@ class NetworkManager {
     
     private let socketClient: StompClientLib
     private let url = URL(string: UrlPath.base.url)!
-    private let currentUserUUID = UIDevice.current.identifierForVendor?.uuidString
+    private (set) var currentUser: User?
+//    private let currentUserUUID = UIDevice.current.identifierForVendor?.uuidString
     
     private var fetchUserHandlerStorage: [([User])->Void] = []
+    private var inviteHandlerStorage: [(Invite)->Void] = []
+    private var inviteAnswerHandlerStorage: [(Invite)->Void] = []
     
     //data
     private var users: [User] = [] {
@@ -80,7 +85,10 @@ class NetworkManager {
 extension NetworkManager: NetworkUserManagable {
     func registerNewUser(_ user: User) {
         socketClient.sendJSONForDict(dict: user.toDict, toDestination: UrlPath.register.url)
+        currentUser = user
         subscribeOnReceiveInvite()
+        
+        requestInviteFor(User(deviceId: "77448930-B72B-4AA0-9E22-8A0AB6F66050", displayName: "Bbb"))
     }
     
     func fetchUsers(_ usersHandler: @escaping ([User]) -> Void) {
@@ -92,29 +100,67 @@ extension NetworkManager: NetworkUserManagable {
         let users = User.parseUsers(data)
         guard !users.isEmpty else { return }
         self.users = users
-    
-        
     }
 }
 
 // MARK: - NetworkInvitable
 extension NetworkManager: NetworkInvitable {
-    func didReceiveInvite() {
-        
+    func didReceiveInvite(_ handler: @escaping (Invite)->Void) {
+        inviteHandlerStorage.append(handler)
     }
     
-    func sendInviteResponse(_ response: Bool) {
-        
+    func didReceiveInviteAnswer(_ handler: @escaping (Invite) -> Void) {
+        inviteAnswerHandlerStorage.append(handler)
     }
     
-    var currentUserReceiveInvite: String? {
-        guard let uuid = currentUserUUID else { return nil }
+    func sendInviteAnswer(_ invite: Invite) {
+        socketClient.sendJSONForDict(dict: invite.toDict, toDestination: UrlPath.sendInvite.url)
+    }
+    
+    func requestInviteFor(_ user: User) {
+        guard let currentUser = currentUser else { return }
+        let invite = Invite(
+            destinationDeviceId: user.deviceId,
+            deviceId: currentUser.deviceId,
+            displayName: currentUser.displayName,
+            accepted: nil)
+        socketClient.sendJSONForDict(dict: invite.toDict, toDestination: UrlPath.sendInvite.url)
+    }
+    
+    private var currentUserReceiveInvite: String? {
+        guard let uuid = currentUser?.deviceId else { return nil }
         return UrlPath.invite(uuid).url
     }
     
     private func subscribeOnReceiveInvite() {
         guard let url = currentUserReceiveInvite else { return }
         socketClient.subscribe(destination: url)
+        socketClient.subscribe(destination: UrlPath.sendInvite.url)
+    }
+    
+    private func handleReceiveInvite(_ data: AnyObject) {
+        guard let invite = Invite(data: data) else { return }
+        
+        if invite.accepted == nil {
+            inviteHandlerStorage.forEach {
+                $0(invite)
+            }
+        } else {
+            inviteAnswerHandlerStorage.forEach {
+                $0(invite)
+            }
+        }
+        
+    }
+    
+    private func handleGetAnswerForInviteFromUsers(_ data: AnyObject) {
+        guard let invite = Invite(data: data) else { return }
+        guard let currentUser = currentUser,
+              invite.deviceId == currentUser.deviceId, invite.accepted != nil else { return }
+        
+        inviteAnswerHandlerStorage.forEach {
+            $0(invite)
+        }
     }
 }
 
@@ -128,6 +174,10 @@ extension NetworkManager: StompClientLibDelegate {
         switch destination {
         case UrlPath.users.url:
             handleReceiveUpdateUser(response)
+        case currentUserReceiveInvite ?? "":
+            handleReceiveInvite(response)
+        case UrlPath.sendInvite.url:
+            handleGetAnswerForInviteFromUsers(response)
         default:
             break
         }
@@ -157,30 +207,4 @@ extension NetworkManager: StompClientLibDelegate {
 
 
 
-struct User: Codable {
-    let deviceId: String
-    let displayName: String
-}
 
-extension User {
-    var toDict: AnyObject {
-        return ["deviceId": deviceId, "displayName": displayName] as AnyObject
-    }
-    
-    init?(data: AnyObject) {
-        guard let data = data as? [String: String] else { return nil }
-        if let deviceId = data["deviceId"], let displayName = data["displayName"] {
-            self.deviceId = deviceId
-            self.displayName = displayName
-        } else {
-            return nil
-        }
-    }
-    
-    static func parseUsers(_ data: AnyObject) -> [User] {
-        guard let datas = data as? [AnyObject] else { return [] }
-        return datas.compactMap {
-            User(data: $0)
-        }
-    }
-}

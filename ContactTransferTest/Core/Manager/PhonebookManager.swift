@@ -33,6 +33,10 @@ class PhonebookManager {
     
     // MARK: - Methods
     
+    
+}
+
+extension PhonebookManager: PhonebookFetchable {
     func fetchContacts(_ contactsHandler: @escaping ([Contact]) -> Void) {
         do {
             store.requestAccess(for: .contacts) { [weak self] isAuthorize, error in
@@ -45,33 +49,12 @@ class PhonebookManager {
                         if let contacts = self?.contacts {
                             contactsHandler(contacts)
                         }
-//                        print("Fetched contacts: \(contact)")
                 })
             }
         } catch {
             print("Failed to fetch contact, error: \(error)")
-            // Handle the error
         }
     }
-}
-
-extension PhonebookManager: PhonebookFetchable {
-//    func fetchContacts() {
-//        do {
-//            store.requestAccess(for: .contacts) { isAuthorize, error in
-//                guard isAuthorize else { return }
-//                try? store.enumerateContacts(
-//                    with: CNContactFetchRequest(keysToFetch: keysToFetch),
-//                    usingBlock: { (cncontact, point) in
-//                        let contact = Contact(contact: cncontact)
-//                        print("Fetched contacts: \(contact)")
-//                })
-//            }
-//        } catch {
-//            print("Failed to fetch contact, error: \(error)")
-//            // Handle the error
-//        }
-//    }
 }
 
 
