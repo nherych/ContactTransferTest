@@ -12,6 +12,7 @@
 		BB50A04C25DFA29800E75DF9 /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A04B25DFA29800E75DF9 /* Invite.swift */; };
 		BB50A06A25E438C700E75DF9 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A06925E438C700E75DF9 /* Contact.swift */; };
 		BB50A06D25E4782B00E75DF9 /* ContactStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A06C25E4782B00E75DF9 /* ContactStatus.swift */; };
+		BB50A07025E5186600E75DF9 /* PongMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A06F25E5186600E75DF9 /* PongMessage.swift */; };
 		BBB7ECF025C9BA0C00439DCD /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */; };
 		BBB7ECF325C9BE5A00439DCD /* UserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */; };
 		BBB7ECF625C9BE7300439DCD /* UserListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */; };
@@ -50,6 +51,7 @@
 		BB50A04B25DFA29800E75DF9 /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		BB50A06925E438C700E75DF9 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		BB50A06C25E4782B00E75DF9 /* ContactStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStatus.swift; sourceTree = "<group>"; };
+		BB50A06F25E5186600E75DF9 /* PongMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PongMessage.swift; sourceTree = "<group>"; };
 		BBB7ECEF25C9BA0C00439DCD /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
 		BBB7ECF225C9BE5A00439DCD /* UserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListVC.swift; sourceTree = "<group>"; };
 		BBB7ECF525C9BE7300439DCD /* UserListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListPresenter.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				BB50A04B25DFA29800E75DF9 /* Invite.swift */,
 				BB50A06925E438C700E75DF9 /* Contact.swift */,
 				BB50A06C25E4782B00E75DF9 /* ContactStatus.swift */,
+				BB50A06F25E5186600E75DF9 /* PongMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				BB50A04C25DFA29800E75DF9 /* Invite.swift in Sources */,
 				BBC5B7A225C95FB3008561CD /* AppDelegate.swift in Sources */,
 				BBC5B7A425C95FB3008561CD /* SceneDelegate.swift in Sources */,
+				BB50A07025E5186600E75DF9 /* PongMessage.swift in Sources */,
 				BBB7ED2C25C9D17300439DCD /* UIImageView+factories.swift in Sources */,
 				BBB7ED2A25C9D17300439DCD /* UIStackView+factories.swift in Sources */,
 				BBB7ED1A25C9D06800439DCD /* Anchor.swift in Sources */,

@@ -10,6 +10,7 @@ import StompClientLib
 
 enum UrlPath {
     case base
+    case pong
     
     case users
     case register
@@ -26,6 +27,8 @@ enum UrlPath {
         switch self {
         case .base:
             return "ws://test-env-2.eba-3e7rpc8d.us-east-1.elasticbeanstalk.com/ws"
+        case .pong:
+            return "/app/active"
         case .users:
             return "/topic/public"
         case .register:
@@ -93,6 +96,22 @@ class NetworkManager {
     init() {
         self.socketClient = StompClientLib()
         socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url) , delegate: self)
+        sendPong()
+    }
+    
+    private func sendPong() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+            print("Send pong")
+            self.socketClient.sendJSONForDict(dict: self.pongMessage.toDict, toDestination: UrlPath.pong.url)
+            self.sendPong()
+        }
+    }
+    
+    private var pongMessage: PongMessage {
+        guard let currentDevice = currentUser?.deviceId else {
+            return PongMessage(deviceId: "", isActive: true)
+        }
+        return PongMessage(deviceId: currentDevice, isActive: true)
     }
     
 }
@@ -268,6 +287,8 @@ extension NetworkManager: StompClientLibDelegate {
     
     func serverDidSendPing() {
         print("serverDidSendPing")
+        
+        socketClient.sendJSONForDict(dict: pongMessage.toDict, toDestination: UrlPath.pong.url)
     }
 }
 
