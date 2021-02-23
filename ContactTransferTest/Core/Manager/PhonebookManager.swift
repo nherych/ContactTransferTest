@@ -23,7 +23,7 @@ class PhonebookManager {
     
     private let keysToFetch = [
         CNContactGivenNameKey, CNContactFamilyNameKey,
-        CNContactPhoneNumbersKey, CNContactEmailAddressesKey] as [CNKeyDescriptor]
+        CNContactPhoneNumbersKey, CNContactEmailAddressesKey, CNContactThumbnailImageDataKey] as [CNKeyDescriptor]
     
     // MARK: - Contructor
     
@@ -57,24 +57,3 @@ extension PhonebookManager: PhonebookFetchable {
     }
 }
 
-
-
-struct Contact {
-    let name: String
-    let surname: String
-    let phoneNumber: String
-    let email: String
-}
-
-extension Contact {
-    init(contact: CNContact) {
-        self.name = contact.givenName
-        self.surname = contact.familyName
-        self.phoneNumber = (contact.phoneNumbers.first?.value)?.stringValue ?? ""
-        self.email = (contact.emailAddresses.first?.value as? String) ?? ""
-    }
-    
-    var fullName: String {
-        return name + " " + surname
-    }
-}

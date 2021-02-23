@@ -70,6 +70,7 @@ final class PhonebookListVC: UIViewController {
     
     @objc private func didTapOnSendButton(_ sender: UIButton) {
         print("didTapOnSendButton")
+        presenter?.sendContacts()
     }
 
 }
@@ -111,6 +112,13 @@ extension PhonebookListVC: PhonebookListPresenterDelegate {
     func shouldOpenUserListWith(presenter: UserListPresenterInterface) {
         let controller = UserListVC(presenter: presenter)
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showSuccesSendGreating(numberOfContacts: Int) {
+        let alert = UIAlertController(title: "Success", message: "You have sent \(numberOfContacts) contacts", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true)
     }
 }
 

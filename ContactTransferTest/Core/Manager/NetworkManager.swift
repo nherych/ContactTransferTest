@@ -11,12 +11,16 @@ import StompClientLib
 enum UrlPath {
     case base
     
-    // register
     case users
     case register
     
     case invite(String)
     case sendInvite
+    
+    case receiveMessage(String)
+    case sendMessages
+    case messageStatus(String)
+    case status
     
     var url: String {
         switch self {
@@ -26,10 +30,18 @@ enum UrlPath {
             return "/topic/public"
         case .register:
             return "/app/register"
-        case .invite(let uuid):
+        case let .invite(uuid):
             return "/user/\(uuid)/invite"
         case .sendInvite:
             return "/app/invite"
+        case let .receiveMessage(uuid):
+            return "/user/\(uuid)/messages"
+        case .sendMessages:
+            return "/app/chat"
+        case let .messageStatus(uuid):
+            return "/user/\(uuid)/status"
+        case .status:
+            return "/app/status"
         }
     }
 }
@@ -46,6 +58,13 @@ protocol NetworkInvitable {
     func requestInviteFor(_ user: User)
 }
 
+protocol NetworkContactTransfarable {
+    func sendContact(_ contact: ContactTransfer)
+    func didReveiveContact(_ handler: @escaping (ContactTransfer) -> Void)
+    func sendContactStatus(_ status: ContactStatus)
+    func didReveiveContactStatus(_ handler: @escaping (ContactStatus) -> Void)
+}
+
 class NetworkManager {
     
     // MARK: - Properties
@@ -57,6 +76,8 @@ class NetworkManager {
     private var fetchUserHandlerStorage: [([User])->Void] = []
     private var inviteHandlerStorage: [(Invite)->Void] = []
     private var inviteAnswerHandlerStorage: [(Invite)->Void] = []
+    private var receiveMessagesHandler: ((ContactTransfer)->Void)?
+    private var receiveMessageStatusHandler: ((ContactStatus)->Void)?
     
     //data
     private var users: [User] = [] {
@@ -72,10 +93,6 @@ class NetworkManager {
     init() {
         self.socketClient = StompClientLib()
         socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url) , delegate: self)
-    }
-    
-    func connect() {
-        
     }
     
 }
@@ -96,7 +113,12 @@ extension NetworkManager: NetworkUserManagable {
     private func handleReceiveUpdateUser(_ data: AnyObject) {
         let users = User.parseUsers(data)
         guard !users.isEmpty else { return }
-        self.users = users
+        if let currentUser = currentUser?.deviceId {
+            self.users = users.filter { $0.deviceId != currentUser }
+        } else {
+            self.users = users
+        }
+        
     }
 }
 
@@ -112,6 +134,9 @@ extension NetworkManager: NetworkInvitable {
     
     func sendInviteAnswer(_ invite: Invite) {
         socketClient.sendJSONForDict(dict: invite.toDict, toDestination: UrlPath.sendInvite.url)
+        if invite.accepted == true {
+            socketClient.subscribe(destination: UrlPath.receiveMessage(invite.deviceId).url)
+        }
     }
     
     func requestInviteFor(_ user: User) {
@@ -130,9 +155,11 @@ extension NetworkManager: NetworkInvitable {
     }
     
     private func subscribeOnReceiveInvite() {
-        guard let url = currentUserReceiveInvite else { return }
+        guard let url = currentUserReceiveInvite,
+              let status = currentUserReceiveMessageStatus else { return }
         socketClient.subscribe(destination: url)
         socketClient.subscribe(destination: UrlPath.sendInvite.url)
+        socketClient.subscribe(destination: status)
     }
     
     private func handleReceiveInvite(_ data: AnyObject) {
@@ -147,7 +174,6 @@ extension NetworkManager: NetworkInvitable {
                 $0(invite)
             }
         }
-        
     }
     
     private func handleGetAnswerForInviteFromUsers(_ data: AnyObject) {
@@ -161,6 +187,46 @@ extension NetworkManager: NetworkInvitable {
     }
 }
 
+// MARK: - NetworkContactTransfarable
+extension NetworkManager: NetworkContactTransfarable {
+    func sendContactStatus(_ status: ContactStatus) {
+        socketClient.sendJSONForDict(dict: status.toDict, toDestination: UrlPath.status.url)
+    }
+    
+    func didReveiveContactStatus(_ handler: @escaping (ContactStatus) -> Void) {
+        receiveMessageStatusHandler = handler
+    }
+    
+    func sendContact(_ contact: ContactTransfer) {
+        socketClient.sendJSONForDict(dict: contact.toDict, toDestination: UrlPath.sendMessages.url)
+    }
+    
+    func didReveiveContact(_ handler: @escaping (ContactTransfer) -> Void) {
+        receiveMessagesHandler = handler
+    }
+    
+    private var currentUserReceiveMessage: String? {
+        guard let uuid = currentUser?.deviceId else { return nil }
+        return UrlPath.receiveMessage(uuid).url
+    }
+    
+    private var currentUserReceiveMessageStatus: String? {
+        guard let uuid = currentUser?.deviceId else { return nil }
+        return UrlPath.messageStatus(uuid).url
+    }
+    
+    private func handleReceiveMessage(_ data: AnyObject) {
+        guard let message = ContactTransfer(data: data) else { return }
+        receiveMessagesHandler?(message)
+    }
+    
+    private func handleReceiveMessageStatus(_ data: AnyObject) {
+        guard let message = ContactStatus(data: data) else { return }
+        receiveMessageStatusHandler?(message)
+    }
+}
+
+// MARK: - StompClientLibDelegate
 extension NetworkManager: StompClientLibDelegate {
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?,
                      akaStringBody stringBody: String?, withHeader header: [String : String]?,
@@ -175,10 +241,13 @@ extension NetworkManager: StompClientLibDelegate {
             handleReceiveInvite(response)
         case UrlPath.sendInvite.url:
             handleGetAnswerForInviteFromUsers(response)
+        case currentUserReceiveMessage ?? "":
+            handleReceiveMessage(response)
+        case currentUserReceiveMessageStatus ?? "":
+            handleReceiveMessageStatus(response)
         default:
             break
         }
-        
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
@@ -201,7 +270,5 @@ extension NetworkManager: StompClientLibDelegate {
         print("serverDidSendPing")
     }
 }
-
-
 
 

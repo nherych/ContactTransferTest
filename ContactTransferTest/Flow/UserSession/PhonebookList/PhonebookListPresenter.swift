@@ -12,11 +12,14 @@ protocol PhonebookListPresenterInterface: class {
     
     var numberOfContacts: Int { get }
     func contactAtIndex(_ index: Int) -> Contact
+    
+    func sendContacts()
 }
 
 protocol PhonebookListPresenterDelegate: class {
     func shouldUpdateContactList()
     func shouldOpenUserListWith(presenter: UserListPresenterInterface)
+    func showSuccesSendGreating(numberOfContacts: Int)
 }
 
 final class PhonebookListPresenter: PhonebookListPresenterInterface {
@@ -32,6 +35,7 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     
     //data
     private var contacts: [Contact] = []
+    private var contactsToSend: [Int: Contact]?
     
     // MARK: - Constructor
     
@@ -58,6 +62,17 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
     
     // MARN: - Methods
     
+    func sendContacts() {
+        contactsToSend = contacts
+            .enumerated()
+            .reduce([Int: Contact]()) { (result, contact) in
+                var result = result
+                result[contact.offset] = contact.element
+                return result
+        }
+        sendContactToUser()
+    }
+    
     func acceptInvite(_ invite: Invite) {
         guard let myName = networkManager.currentUser?.displayName else { return }
         networkManager.sendInviteAnswer(invite.accept(myName: myName))
@@ -75,11 +90,20 @@ final class PhonebookListPresenter: PhonebookListPresenterInterface {
             self?.delegate?.shouldUpdateContactList()
         }
         
-        
-        
-        
+        networkManager.didReveiveContactStatus { [weak self] status in
+            print(status)
+            self?.sendContactToUser()
+        }
     }
     
+    private func sendContactToUser() {
+        guard let firstKey = contactsToSend?.keys.sorted().first else {
+            delegate?.showSuccesSendGreating(numberOfContacts: contacts.count)
+            return
+        }
+        guard let nextContact = contactsToSend?[firstKey] else { return }
+        contactsToSend?[firstKey] = nil
+        let transfer = nextContact.makeTransfer(toUser: userIdToSend, size: contacts.count, current: firstKey+1)
+        networkManager.sendContact(transfer)
+    }
 }
-
-

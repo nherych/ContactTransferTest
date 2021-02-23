@@ -31,7 +31,7 @@ protocol UserInvitePresenterDelegate: class {
     func didReceiveInvite(_ invite: Invite)
     
     func shouldTransferContacts(presenter: PhonebookListPresenterInterface)
-    func shouldGetContactsFromUser(withId id: String)
+    func shouldGetContactsFromUser(presenter: ContactTransferPresenter)
 }
 
 final class UserListPresenter: UserListPresenterInterface {
@@ -72,7 +72,9 @@ final class UserListPresenter: UserListPresenterInterface {
     func acceptInvite(_ invite: Invite) {
         guard let myName = networkManager.currentUser?.displayName else { return }
         networkManager.sendInviteAnswer(invite.accept(myName: myName))
-        delegate?.shouldGetContactsFromUser(withId: invite.deviceId)
+        
+        let presenter = ContactTransferPresenter(fromUserId: invite.deviceId, networkManager: networkManager)
+        delegate?.shouldGetContactsFromUser(presenter: presenter)
     }
     
     func declineInvite(_ invite: Invite) {

@@ -16,6 +16,7 @@ class ContactCell: UICollectionViewCell {
             userNameLabel.text = contact?.fullName
             phoneNumberLabel.text = contact?.phoneNumber
             emailAdressLabel.text = contact?.email
+            photoImageView.image = contact?.image?.toImage
         }
     }
     
@@ -85,5 +86,13 @@ extension ContactCell {
             $0.leading.constraint(to: photoImageView, by: .trailing(30))
             $0.size(.height(64))//, .width(64))
         }
+    }
+}
+
+
+
+extension Data {
+    var toImage: UIImage? {
+        UIImage(data: self)
     }
 }

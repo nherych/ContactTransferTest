@@ -97,21 +97,25 @@ extension ContactTransferVC {
 
 // MARK: - UserSessionPresenterDelegate
 extension ContactTransferVC: ContactTransferPresenterDelegate {
-    
+    func shouldUpdateContactList() {
+        collectionView.reloadData()
+        progressBarItem.title = presenter?.progressMessage
+        progressView.setProgress(presenter?.progress ?? 0, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension ContactTransferVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6//presenter?.numberOfContacts ?? 0
+        return presenter?.numberOfContacts ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         
-//        if let cell = cell as? ContactCell {
-//            cell.contact = presenter?.contactAtIndex(indexPath.item)
-//        }
+        if let cell = cell as? ContactCell {
+            cell.contact = presenter?.contactAtIndex(indexPath.item)
+        }
         
         return cell
     }
@@ -133,7 +137,7 @@ extension ContactTransferVC {
     
     func setupProgressView() {
         collectionView.addSubview(progressView)
-        progressView.setProgress(0.7, animated: true)
+//        progressView.setProgress(0.7, animated: true)
         progressView.layout {
             $0.bottom.constraint(to: view.safeAreaLayoutGuide, by: .bottom(-20))
             $0.leading.constraint(to: view.safeAreaLayoutGuide, by: .leading(40))

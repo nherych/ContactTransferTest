@@ -73,8 +73,8 @@ extension UserListVC: UserListPresenterDelegate {
         navigationController?.present(navigation, animated: true)
     }
     
-    func shouldGetContactsFromUser(withId id: String) {
-        let presenter = ContactTransferPresenter()
+    func shouldGetContactsFromUser(presenter: ContactTransferPresenter) {
+//        let presenter = ContactTransferPresenter(networkManager: mana)
         let controller = ContactTransferVC(presenter: presenter)
         controller.view.backgroundColor = .white
         let navigation = UINavigationController(rootViewController: controller)
