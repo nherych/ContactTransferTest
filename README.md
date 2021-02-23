@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. Clone repository with project
+1. Clone project repository
 
 2. Install dependency manager:
 
