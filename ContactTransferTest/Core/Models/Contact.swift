@@ -50,7 +50,7 @@ extension Contact {
     private var lowResolutionImageBase64: String? {
 //        StaticImage.image.base64
         guard let data = image else { return nil }
-        return UIImage(data: data)?.jpegData(compressionQuality: 0.6)?.base64EncodedString()
+        return UIImage(data: data)?.jpegData(compressionQuality: 0.35)?.base64EncodedString()
     }
 }
 
